@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Job List</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+            <!-- <li class="breadcrumb-item active">Static Navigation</li> -->
+        </ol>
+        
+        <div class="mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Job Name</th>
+                                <th>Schedule</th>
+                                <th>Log Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {%for item in tree.children recursive %}
+                            <tr>
+                                <td>{{loop.index}}</td>
+                                <td>{{ item.name }}</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary">Run Job</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                  </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div style="height: 100vh;"></div>
+        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div> -->
+    </div>
+</main>
+
+{% endblock %}
