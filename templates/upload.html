@@ -3,13 +3,13 @@
 
     <main>
         <div class="container-fluid">
-            <h1 class="mt-4">Upload Job</h1>
+            <h1 class="mt-4">Upload Data</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="home.html">Home</a></li>
                 <!-- <li class="breadcrumb-item active">Static Navigation</li> -->
             </ol>
             <div class="mb-4">
-                <p>Upload Job Zip File</p>
+                <p>Upload Raw Data File </p>
                 <form method=post enctype=multipart/form-data>
                     <input type=file name=file>
                     <input type=submit value=Upload>
@@ -28,6 +28,59 @@
                         {%endif%}
                     {%endwith%}
             </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Filename</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        {%for row in filedata %}
+                            <tr>
+                                <td>{{row.file_id}}</td>
+                                <td>{{row.file_name}}</td>
+                                <td>
+ 
+                                     <a href="/delete-file/{{row.file_id}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteFileModal">Delete</a>
+                                    
+                                </td>
+                            </tr>
+                            
+                            <div id="deleteFileModal" class="modal fade">
+                              <div class="modal-dialog modal-confirm">
+                                <div class="modal-content">
+                                  <div class="modal-header flex-column">
+                                    <div class="icon-box">
+                                      <i class="icon-remove">&#xE5CD;</i>
+                                    </div>						
+                                    <h4 class="modal-title w-100">Are you sure?</h4>	
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                  </div>
+                                    <form action="{{url_for('delete_file')}}" method="POST">
+                                    <div class="modal-body">
+                                    <p>Do you really want to delete these job?</p>
+                                  </div>
+                                  <div class="modal-footer justify-content-center">
+                                    <input type="hidden" name="file_name_delete" value="{{row.file_name}}">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" name="file_id_delete" class="btn btn-danger" value="{{row.file_id}}">Delete</button>
+                                  </div>
+                                   </form>
+                                </div>
+                              </div>
+                            </div>
+                        {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
             <!-- <div style="height: 100vh;"></div>
             <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div> -->
