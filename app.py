@@ -129,6 +129,7 @@ def upload_file():
                 list=[]
                
                 list.append(filename)
+                print(filename)
                 for filename in list:
                     file_name = filename
                     file_path = os.path.join(UPLOAD_DATA_FOLDER,filename)
@@ -292,5 +293,6 @@ def delete_file():
 
         return redirect(url_for('upload_file'))
     return redirect(url_for('upload_file'))
+
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
